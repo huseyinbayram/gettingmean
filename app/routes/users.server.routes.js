@@ -20,12 +20,12 @@ module.exports = function (app) {
     app.get('/signout', users.signout);
 
     app.get('/oauth/facebook', passport.authenticate('facebook', {
-        scope: 'read_stream',
+        scope: ['public_profile', 'email'],
         failureRedirect: '/signin'
     }));
 
     app.get('/oauth/facebook/callback', passport.authenticate('facebook', {
-        scope: 'read_stream',
+        scope: ['public_profile', 'email'],
         failureRedirect: '/signin',
         successRedirect: '/'
     }));
