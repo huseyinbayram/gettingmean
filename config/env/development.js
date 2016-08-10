@@ -6,8 +6,8 @@ module.exports = {
     db: 'mongodb://localhost/mean-second',
     sessionSecret: 'developmentSessionSecret',
     facebook: {
-        clientID: '190243067717118',
-        clientSecret: '76765ce3603237a435b7bcb784da72c9',
+        clientID: '305764966423705',
+        clientSecret: '4d8097807475a1cc1ddf1b683e71aa25',
         callbackURL: 'http://localhost:3000/oauth/facebook/callback'
     }
 };
