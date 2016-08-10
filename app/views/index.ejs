@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:ng="http://angularjs.org">
 <head>
     <title><%= title %></title>
 </head>
@@ -11,7 +11,11 @@
         <a href="/signin">Sign in</a>
         <a href="/signup">Sign up</a>
     <% } %>
-    <br>
-    <img src="img/lena_color.gif" alt="logo">
+
+    <section ng-include="'example/views/example.client.view.html'"></section>
+
+    <script type="text/javascript" src="/lib/angular/angular.js"></script>
+    <script type="text/javascript" src="/example/example.client.module.js"></script>
+    <script type="text/javascript" src="/application.js"></script>
 </body>
 </html>
