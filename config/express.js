@@ -2,17 +2,22 @@
  * Created by hbayram on 27.04.2016.
  */
 var config = require('./config'),
-     express = require('express'),
-     morgan = require('morgan'),
-     compress = require('compression'),
-     bodyParser = require('body-parser'),
-     methodOverride = require('method-override'),
-     session = require('express-session'),
-     flash = require('connect-flash'),
-     passport = require('passport');
+    http = require('http'),
+    express = require('express'),
+    socketio = require('socket.io'),
+    morgan = require('morgan'),
+    compress = require('compression'),
+    bodyParser = require('body-parser'),
+    methodOverride = require('method-override'),
+    session = require('express-session'),
+    MongoStore = require('connect-mongo')(session),
+    flash = require('connect-flash'),
+    passport = require('passport');
 
-module.exports = function () {
+module.exports = function (db) {
     var app = express();
+    var server = http.createServer(app);
+    var io = socketio.listen(server);
 
     if (process.env.NODE_ENV === 'development') {
         app.use(morgan('dev'));
@@ -26,10 +31,15 @@ module.exports = function () {
     app.use(bodyParser.json());
     app.use(methodOverride());
 
+    var mongoStore = new MongoStore({
+      mongooseConnection: db.connection
+    });
+
     app.use(session({
-        saveUninitialized: true,
-        resave: true,
-        secret: config.sessionSecret
+      saveUninitialized: true,
+      resave: true,
+      secret: config.sessionSecret,
+      store: mongoStore
     }));
 
     app.set('views', './app/views');
@@ -45,5 +55,7 @@ module.exports = function () {
 
     app.use(express.static('./public'));
 
-    return app;
+    require('./socketio')(server, io, mongoStore);
+
+    return server;
 };
