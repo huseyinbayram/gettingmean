@@ -2,6 +2,7 @@
   "name": "gettingmean",
   "version": "0.0.2",
   "dependencies": {
-    "angular": "~1.2"
+    "angular": "~1.2",
+    "angular-route": "~1.2"
   }
 }
