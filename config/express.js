@@ -31,7 +31,7 @@ module.exports = function () {
         resave: true,
         secret: config.sessionSecret
     }));
-    
+
     app.set('views', './app/views');
     app.set('view engine', 'ejs');
 
@@ -41,6 +41,7 @@ module.exports = function () {
 
     require('../app/routes/index.server.routes')(app);
     require('../app/routes/users.server.routes')(app);
+    require('../app/routes/articles.server.routes')(app);
 
     app.use(express.static('./public'));
 
