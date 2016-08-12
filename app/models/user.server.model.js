@@ -85,7 +85,7 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
         } else {
             callback(null);
         }
-    })
+    });
 };
 
 UserSchema.set('toJSON', {

@@ -45,7 +45,7 @@ exports.renderSignup = function (req, res, next) {
     } else {
         return res.redirect('/');
     }
-}
+};
 
 exports.signup = function (req, res, next) {
     if (!req.user) {
@@ -118,4 +118,4 @@ exports.requiresLogin = function(req, res, next) {
   }
 
   next();
-}
+};
