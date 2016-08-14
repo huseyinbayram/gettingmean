@@ -15,6 +15,14 @@ module.exports = function(grunt) {
           ext: 'js,html',
           watch: ['server.js', 'config/**/*.js', 'app/**/*.js']
         }
+      },
+      debug: {
+        script: 'server.js',
+        options: {
+          nodeArgs: ['--debug'],
+          ext: 'js,html',
+          watch: ['server.js', 'config/**/*.js', 'app/**/*.js']
+        }
       }
     },
     mochaTest: {
@@ -61,7 +69,16 @@ module.exports = function(grunt) {
         options: {
           logConcurrentOutput: true
         }
+      },
+      debug: {
+        tasks: ['nodemon:debug', 'watch', 'node-inspector'],
+        options: {
+          logConcurrentOutput: true
+        }
       }
+    },
+    'node-inspector': {
+      debug: {}
     }
   });
 
@@ -74,8 +91,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-csslint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-node-inspector');
 
-  grunt.registerTask('default', ['env:dev', 'lint', 'concurrent']);
+  grunt.registerTask('default', ['env:dev', 'lint', 'concurrent:dev']);
+  grunt.registerTask('debug', ['env:dev', 'lint', 'concurrent:debug']);
   grunt.registerTask('test', ['env:test', 'mochaTest', 'karma', 'protractor']);
   grunt.registerTask('lint', ['jshint', 'csslint']);
 };
