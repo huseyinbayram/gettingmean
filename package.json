@@ -33,7 +33,6 @@
     "karma": "~1.2.0",
     "karma-jasmine": "~1.0.2",
     "karma-phantomjs-launcher": "~1.0.1",
-    "mocha": "^3.0.2",
     "should": "~11.0.0",
     "supertest": "~2.0.0"
   }
